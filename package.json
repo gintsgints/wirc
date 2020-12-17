@@ -1,4 +1,6 @@
 {
+  "name": "wirc",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "vite --port 3333 --open",

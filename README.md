@@ -110,11 +110,11 @@ pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
 
 When you use this template, try follow the checklist to update your info properly
 
-- [ ] Rename `name` field in `package.json`
+- [x] Rename `name` field in `package.json`
 - [ ] Change the author name in `LICENSE`
-- [ ] Change the title in `index.html`
+- [x] Change the title in `index.html`
 - [ ] Change the favicon in `public`
-- [ ] Remove the `.github` folder which contains the funding info
+- [x] Remove the `.github` folder which contains the funding info
 - [ ] Clean up the READMEs and remove routes
 
 And, enjoy :)
