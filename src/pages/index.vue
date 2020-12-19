@@ -99,7 +99,7 @@
       </div>
       <div class="w-4/5 border-l border-gray-300 flex flex-col">
         <div
-          class="flex-none h-16 flex flex-row border-b justify-between items-center p-4"
+          class="flex-none h-16 flex flex-row border-b justify-between items-center p-5"
         >
           <div class="flex flex-col space-y-1">
             <strong>Nikola Tesla</strong>
@@ -128,10 +128,34 @@
           </div>
         </div>
         <div
-          class="flex-auto flex flex-col"
+          class="flex-auto flex flex-col p-5"
           style="background-image: url(bg.png)"
         >
-          <div class="flex-auto">b</div>
+          <div class="flex-auto">
+            <div v-for="n in 5" v-bind:key="n" class="flex flex-row space-x-2">
+              <svg
+                class="w-6 h-6"
+                flex-none
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <div class="flex flex-col">
+                <div class="bg-blue-200 rounded-lg p-3">
+                  Some conversation text here
+                </div>
+                <div class="text-sm text-gray-500">5hr ago</div>
+              </div>
+            </div>
+          </div>
           <div class="flex-none h-40 p-4">
             <textarea
               class="outline-none h-full w-full border border-blue-600 border-opacity-0 hover:border-opacity-80 rounded p-4 shadow-lg"
