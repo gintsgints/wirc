@@ -128,11 +128,16 @@
           </div>
         </div>
         <div
-          class="flex-auto flex flex-col p-5"
+          class="flex-auto flex flex-col overflow-auto"
           style="background-image: url(bg.png)"
         >
-          <div class="flex-auto">
-            <div v-for="n in 5" v-bind:key="n" class="flex flex-row space-x-2">
+          <div class="flex-auto overflow-auto h-30 p-5">
+            <div
+              v-for="n in 30"
+              v-bind:key="n"
+              :class="n % 2 ? '' : 'flex-row-reverse space-x-reverse'"
+              class="flex flex-row space-x-2"
+            >
               <svg
                 class="w-6 h-6"
                 flex-none
