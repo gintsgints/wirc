@@ -1,5 +1,5 @@
 <template>
-  <div class="w-4/5 border-l border-gray-300 flex flex-col">
+  <div class="w-full md:w-4/5 border-l border-gray-300 flex flex-col">
     <div
       class="flex-none h-16 flex flex-row border-b justify-between items-center p-5"
     >

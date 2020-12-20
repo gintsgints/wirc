@@ -1,6 +1,8 @@
 <template>
-  <div class="flex flex-col justify-between items-center bg-gray-200">
-    <div class="flex flex-col space-y-5">
+  <div
+    class="flex flex-row md:flex-col justify-between items-center bg-gray-200"
+  >
+    <div class="flex flex-row md:flex-col space-x-3 md:space-y-5">
       <a class="relative">
         <svg
           class="w-9 h-9"
@@ -29,7 +31,7 @@
         <div class="rounded-full bg-gray-400 w-9 h-9"></div>
       </a>
     </div>
-    <div class="flex flex-col space-y-5">
+    <div class="flex flex-row md:flex-col space-x-3 md:space-y-5">
       <a href="">
         <div class="rounded-full bg-gray-400 w-9 h-9"></div>
       </a>

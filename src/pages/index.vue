@@ -1,7 +1,7 @@
 <template>
-  <div class="flex md:flex-row flex-col h-screen bg-gray-200">
-    <Toolbar class="flex-none md:order-first order-last w-16 p-4" />
-    <MainChatWindow class="flex-auto md:order-last order-first" />
+  <div class="flex flex-col md:flex-row h-screen bg-gray-200">
+    <Toolbar class="flex-none order-last md:order-first md:w-16 p-4" />
+    <MainChatWindow class="flex-auto order-first md:order-last" />
   </div>
 </template>
 
