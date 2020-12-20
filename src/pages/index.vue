@@ -184,20 +184,7 @@
               class="outline-none h-full flex-auto border border-blue-600 border-opacity-0 hover:border-opacity-80 rounded p-4 shadow-lg"
             ></textarea>
             <a class="block flex-none w-10">
-              <svg
-                class="w-8 h-8"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                ></path>
-              </svg>
+              <Icon icon="carbon:send" style="font-size: 32px" />
             </a>
           </div>
         </div>
