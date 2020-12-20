@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <ChatSendMessage />
     </div>
+    <ChatSendMessage />
   </div>
 </template>
