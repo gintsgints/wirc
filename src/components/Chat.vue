@@ -6,6 +6,7 @@
       style="background-image: url(bg.png)"
     >
       <div class="flex-auto overflow-auto h-30 p-5">
+        {{ messages }}
         <div
           v-for="n in 30"
           v-bind:key="n"
@@ -39,3 +40,7 @@
     <ChatSendMessage />
   </div>
 </template>
+
+<script setup lang="ts">
+import { messages } from '/~/logics'
+</script>
