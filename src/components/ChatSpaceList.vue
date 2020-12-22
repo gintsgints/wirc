@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col bg-white p-2">
     <div class="flex flex-none justify-between items-center pb-8 mb-4">
       <h1 class="font-semibold pl-2 text-2xl">Chat spaces</h1>
       <svg

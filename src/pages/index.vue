@@ -1,14 +1,12 @@
 <template>
   <div class="flex flex-col md:flex-row h-screen bg-gray-200">
-    <Toolbar class="flex-none order-last md:order-first md:w-16 p-4" />
-    <div class="h-5/6 md:h-full md:flex-auto order-first md:order-last">
-      <div class="flex bg-white rounded-tl-xl shadow-xl">
-        <ChatSpaceList
-          class="w-1/5 p-2 flex-none hidden md:block md:overflow-auto"
-        />
-        <Chat />
-      </div>
-    </div>
+    <Toolbar
+      class="flex-none w-screen order-last md:order-first h-16 md:h-screen md:w-16"
+    />
+    <ChatSpaceList class="hidden overflow-auto md:block w-1/5"></ChatSpaceList>
+    <Chat
+      class="order-first w-screen overflow-auto flex-grow md:order-last"
+    ></Chat>
   </div>
 </template>
 

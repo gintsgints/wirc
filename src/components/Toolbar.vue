@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex flex-row md:flex-col justify-between items-center bg-gray-200"
+    class="flex flex-row md:flex-col justify-between justify-items-center items-center p-4 bg-gray-200"
   >
-    <div class="flex flex-row md:flex-col space-x-3 md:space-y-5">
+    <div class="flex flex-row md:flex-col space-x-3 md:space-x-0 md:space-y-5">
       <a class="relative">
         <svg
           class="w-9 h-9"
@@ -25,13 +25,13 @@
         </div>
       </a>
       <a href="">
-        <div class="rounded-full bg-gray-400 w-9 h-9"></div>
+        <div class="rounded-full bg-gray-400 w-9 h-9 md:pr-9"></div>
       </a>
       <a href="">
         <div class="rounded-full bg-gray-400 w-9 h-9"></div>
       </a>
     </div>
-    <div class="flex flex-row md:flex-col space-x-3 md:space-y-5">
+    <div class="flex flex-row md:flex-col space-x-3 md:space-x-0 md:space-y-5">
       <a href="">
         <div class="rounded-full bg-gray-400 w-9 h-9"></div>
       </a>
