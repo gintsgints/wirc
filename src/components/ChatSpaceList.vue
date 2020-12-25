@@ -18,32 +18,27 @@
       </svg>
     </div>
     <div class="flex-auto overflow-y-auto">
-      <a v-for="n in 100" v-bind:key="n" class="block border-b">
+      <a
+        v-for="(space, index) in spaces.data"
+        v-bind:key="space.created"
+        class="block border-b"
+        @click="setActive(index)"
+      >
         <div
           :class="
-            n === 2
+            index === activeSpace
               ? 'bg-blue-200 border-blue-500'
               : 'border-transparent hover:bg-gray-100'
           "
           class="border-l-2 p-3 space-y-4"
         >
           <div class="flex flex-row items-center">
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+            <UserIcon class="w-5 h-5 mr-2" />
+            <strong class="flex-grow"
+              >{{ space.creator.firstName }}
+              {{ space.creator.lastName }}</strong
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-            <strong class="flex-grow">Nicola Tesla</strong>
-            <div class="text-sm text-gray-600">5hr</div>
+            <div class="text-sm text-gray-600">{{ space.created }}</div>
           </div>
           <div class="flex flex-row items-center">
             <svg
@@ -61,8 +56,7 @@
               ></path>
             </svg>
             <div class="flex-grow truncate text-xs">
-              some message content sdfgf assdfga sdfas ddfas fggaseefawefe
-              awwerrf awe fzerf asdfa dsfasdf asdf asdfa sdfasdf a
+              {{ space.messages[0].message }}
             </div>
           </div>
         </div>
@@ -70,3 +64,11 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { spaces, activeSpace } from '/~/logics'
+
+const setActive = (index: number) => {
+  activeSpace.value = index
+}
+</script>

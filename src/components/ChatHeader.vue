@@ -2,10 +2,14 @@
   <div
     class="flex-none h-16 flex flex-row border-b justify-between items-center p-5"
   >
-    <div class="flex flex-col space-y-1">
-      <strong>Nikola Tesla</strong>
+    <div class="flex flex-col w-1/2 space-y-1">
+      <strong
+        >{{ spaces.data[activeSpace].creator.firstName }}
+        {{ spaces.data[activeSpace].creator.lastName }}</strong
+      >
       <input
         type="text"
+        v-model="spaces.data[activeSpace].subject"
         name="subject"
         placeholder="Type a subject here"
         class="text-sm outline-none border-b border-dashed border-gray-300 border-opacity-0 focus:border-opacity-100 hover:border-opacity-60 text-black placeholder-gray-600"
@@ -29,3 +33,7 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { spaces, activeSpace } from '/~/logics'
+</script>
