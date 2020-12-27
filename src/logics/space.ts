@@ -4,6 +4,7 @@ import { igor, me, User } from './user'
 
 export interface Space {
   subject?: string
+  public?: boolean
   creator: User
   created: string
   messages: Array<Message>
