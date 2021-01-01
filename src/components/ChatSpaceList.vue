@@ -19,8 +19,8 @@
     </div>
     <div class="flex-auto overflow-y-auto">
       <a
-        v-for="(space, index) in spaces.data"
-        v-bind:key="space.created"
+        v-for="(space, index) in spaces"
+        v-bind:key="space.id"
         class="block border-b"
         @click="setActive(index)"
       >
@@ -35,10 +35,11 @@
           <div class="flex flex-row items-center">
             <UserIcon class="w-5 h-5 mr-2" />
             <strong class="flex-grow"
-              >{{ space.creator.firstName }}
-              {{ space.creator.lastName }}</strong
-            >
-            <div class="text-sm text-gray-600">{{ space.created }}</div>
+              ><UserFullName :user="space.creator"
+            /></strong>
+            <div class="text-sm text-gray-600">
+              {{ mymoment(new Date()).to(space.created.toDate()) }}
+            </div>
           </div>
           <div class="flex flex-row items-center">
             <svg
@@ -56,7 +57,11 @@
               ></path>
             </svg>
             <div class="flex-grow truncate text-xs">
-              {{ space.messages[0].message }}
+              {{
+                space.messages && space.messages.length > 0
+                  ? space.messages[0].message
+                  : space.subject
+              }}
             </div>
           </div>
         </div>
@@ -66,7 +71,16 @@
 </template>
 
 <script setup lang="ts">
-import { spaces, activeSpace } from '/~/logics'
+import { reactive, ref } from 'vue'
+import moment from 'moment'
+import { activeSpace, loadSpaces, loadUsers } from '/~/logics'
+
+const spaces = loadSpaces()
+const users = loadUsers()
+
+const mymoment = () => {
+  return moment()
+}
 
 const setActive = (index: number) => {
   activeSpace.value = index
