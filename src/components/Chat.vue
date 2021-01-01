@@ -7,9 +7,13 @@
     >
       <div class="flex-auto overflow-auto h-30 p-5">
         <div
-          v-for="message in spaces.data[activeSpace].messages"
+          v-for="message in messages"
           v-bind:key="message.when"
-          :class="message.user.me ? '' : 'flex-row-reverse space-x-reverse'"
+          :class="
+            message.user === currentUser
+              ? ''
+              : 'flex-row-reverse space-x-reverse'
+          "
           class="flex flex-row space-x-2"
         >
           <UserIcon class="w-6 h-6" flex-none />
@@ -17,7 +21,9 @@
             <div class="bg-blue-200 rounded-lg p-3">
               {{ message.message }}
             </div>
-            <div class="text-sm text-gray-500">{{ message.when }}</div>
+            <div class="text-sm text-gray-500">
+              {{ moment(new Date()).to(message.when.toDate()) }}
+            </div>
           </div>
         </div>
       </div>
@@ -27,5 +33,6 @@
 </template>
 
 <script setup lang="ts">
-import { spaces, activeSpace } from '/~/logics'
+import moment from 'moment'
+import { spaces, activeSpace, messages, currentUser } from '/~/logics'
 </script>

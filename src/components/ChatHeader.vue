@@ -2,7 +2,7 @@
   <div
     class="flex-none h-16 flex flex-row border-b justify-between items-center p-5"
   >
-    <div class="flex flex-col w-1/2 space-y-1">
+    <div v-if="spaces.data[activeSpace]" class="flex flex-col w-1/2 space-y-1">
       <strong
         >{{ spaces.data[activeSpace].creator.firstName }}
         {{ spaces.data[activeSpace].creator.lastName }}</strong

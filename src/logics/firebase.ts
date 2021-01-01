@@ -21,11 +21,6 @@ export const loadSpaces = () => {
   return spaces
 }
 
-export const getUser = async (userId: string) => {
-  const user = await usersCollection.doc(userId).get()
-  return user.exists ? user.data() : null
-}
-
 export const loadUsers = () => {
   const users = ref([])
   const close = usersCollection.onSnapshot(snapshot => {
@@ -33,4 +28,18 @@ export const loadUsers = () => {
   })
   onUnmounted(close)
   return users
+}
+
+export const loadMessages = (spaceId) => {
+  const messages = ref([])
+  const close = spacesCollection.doc(spaceId).collection('message').onSnapshot(snapshot => {
+    messages.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+  })
+  onUnmounted(close)
+  return messages
+}
+
+export const getUser = async (userId: string) => {
+  const user = await usersCollection.doc(userId).get()
+  return user.exists ? user.data() : null
 }

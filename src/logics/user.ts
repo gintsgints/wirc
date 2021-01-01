@@ -1,4 +1,5 @@
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import { auth } from './firebase'
 
 export interface User {
   id: number,
@@ -30,7 +31,16 @@ export const igor: User = {
   me: false
 }
 
-
 users.push(me)
 users.push(layla)
 users.push(igor)
+
+export const currentUser = ref('')
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    currentUser.value = user.uid
+  } else {
+    currentUser.value = ''
+  }
+})

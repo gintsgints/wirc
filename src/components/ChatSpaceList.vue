@@ -22,11 +22,11 @@
         v-for="(space, index) in spaces"
         v-bind:key="space.id"
         class="block border-b"
-        @click="setActive(index)"
+        @click="setActive(space.id)"
       >
         <div
           :class="
-            index === activeSpace
+            space.id === activeSpace
               ? 'bg-blue-200 border-blue-500'
               : 'border-transparent hover:bg-gray-100'
           "
@@ -38,7 +38,7 @@
               ><UserFullName :user="space.creator"
             /></strong>
             <div class="text-sm text-gray-600">
-              {{ mymoment(new Date()).to(space.created.toDate()) }}
+              {{ moment(new Date()).to(space.created.toDate()) }}
             </div>
           </div>
           <div class="flex flex-row items-center">
@@ -73,16 +73,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import moment from 'moment'
-import { activeSpace, loadSpaces, loadUsers } from '/~/logics'
+import { activeSpace, setActive, loadSpaces, loadUsers } from '/~/logics'
 
 const spaces = loadSpaces()
 const users = loadUsers()
-
-const mymoment = () => {
-  return moment()
-}
-
-const setActive = (index: number) => {
-  activeSpace.value = index
-}
 </script>
