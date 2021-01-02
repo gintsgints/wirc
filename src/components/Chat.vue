@@ -1,6 +1,6 @@
 <template>
   <div class="w-full md:w-4/5 border-l border-gray-300 bg-white flex flex-col">
-    <ChatHeader />
+    <!-- <ChatHeader /> -->
     <div
       class="flex-auto flex flex-col overflow-auto"
       style="background-image: url(bg.png)"
@@ -34,5 +34,5 @@
 
 <script setup lang="ts">
 import moment from 'moment'
-import { spaces, activeSpace, messages, currentUser } from '/~/logics'
+import { activeSpace, messages, currentUser } from '/~/logics'
 </script>

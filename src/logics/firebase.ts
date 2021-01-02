@@ -3,6 +3,7 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import { onUnmounted, ref } from 'vue'
 import { firebaseConfig } from './firebase.config'
+import { Message } from './message'
 
 firebase.initializeApp(firebaseConfig)
 
@@ -30,7 +31,7 @@ export const loadUsers = () => {
   return users
 }
 
-export const loadMessages = (spaceId) => {
+export const loadMessages = (spaceId: string) => {
   const messages = ref([])
   const close = spacesCollection.doc(spaceId).collection('message').onSnapshot(snapshot => {
     messages.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
@@ -42,4 +43,12 @@ export const loadMessages = (spaceId) => {
 export const getUser = async (userId: string) => {
   const user = await usersCollection.doc(userId).get()
   return user.exists ? user.data() : null
+}
+
+export const addMessage = async (spaceId: string, message: Message) => {
+  if (auth.currentUser) {
+    message.when = firebase.firestore.Timestamp.fromDate(new Date())
+    message.user = auth.currentUser.uid
+    spacesCollection.doc(spaceId).collection('message').add(message)
+  }
 }
