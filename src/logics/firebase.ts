@@ -16,7 +16,7 @@ export const spacesCollection = db.collection('space')
 
 export const loadSpaces = () => {
   const spaces = ref([])
-  const close = spacesCollection.onSnapshot(snapshot => {
+  const close = spacesCollection.orderBy('created', 'desc').onSnapshot(snapshot => {
     spaces.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
   })
   onUnmounted(close)
@@ -30,15 +30,6 @@ export const loadUsers = () => {
   })
   onUnmounted(close)
   return users
-}
-
-export const loadMessages = (spaceId: string) => {
-  const messages = ref([])
-  const close = spacesCollection.doc(spaceId).collection('message').onSnapshot(snapshot => {
-    messages.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-  })
-  onUnmounted(close)
-  return messages
 }
 
 export const getUser = async (userId: string) => {

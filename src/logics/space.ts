@@ -1,6 +1,7 @@
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { Message } from './message'
 import { User } from './user'
+import firebase from 'firebase/app'
 import { spacesCollection } from '/~/logics'
 
 export interface Space {
@@ -8,7 +9,7 @@ export interface Space {
   subject?: string
   public?: boolean
   creator: User
-  created: string
+  created: firebase.firestore.Timestamp
   messages: Array<Message>
 }
 
@@ -17,7 +18,7 @@ export const messages = ref([])
 
 export const setActive = (space: Space) => {
   activeSpace.value = space
-  spacesCollection.doc(space.id).collection('message').onSnapshot(snapshot => {
+  spacesCollection.doc(space.id).collection('message').orderBy('when', 'asc').onSnapshot(snapshot => {
     messages.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
   })
 }

@@ -20,7 +20,7 @@
     <div class="flex-auto overflow-y-auto">
       <a
         v-for="(space, index) in spaces"
-        v-bind:key="space.id"
+        :key="space.id"
         class="block border-b"
         @click="setActive(space)"
       >

@@ -8,7 +8,7 @@
       <div class="flex-auto overflow-auto h-30 p-5">
         <div
           v-for="message in messages"
-          v-bind:key="message.when"
+          :key="message.id"
           :class="
             message.user === currentUser
               ? ''
