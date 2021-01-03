@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, ref } from 'vue'
+import { defineProps, onMounted, ref, watch } from 'vue'
 import { getUser } from '/~/logics'
 
 const firstName = ref('')
@@ -17,10 +17,13 @@ const props = defineProps({
   }
 })
 
-onMounted(async () => {
+const update = async () => {
   const user = await getUser(props.user)
   firstName.value = user.firstName + ' '
   lastName.value = user.lastName
-})
-// export const user = getUser(props.user)
+}
+
+watch(() => props.user, update, { flush: 'post' })
+
+onMounted(update)
 </script>

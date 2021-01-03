@@ -22,11 +22,11 @@
         v-for="(space, index) in spaces"
         v-bind:key="space.id"
         class="block border-b"
-        @click="setActive(space.id)"
+        @click="setActive(space)"
       >
         <div
           :class="
-            space.id === activeSpace
+            activeSpace && space.id === activeSpace.id
               ? 'bg-blue-200 border-blue-500'
               : 'border-transparent hover:bg-gray-100'
           "
