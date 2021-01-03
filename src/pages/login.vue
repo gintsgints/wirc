@@ -56,7 +56,6 @@ const error = ref('')
 const router = useRouter()
 
 const login = () => {
-  console.log('user:', user.value, 'password: ', password.value)
   auth
     .signInWithEmailAndPassword(user.value, password.value)
     .then((user) => {

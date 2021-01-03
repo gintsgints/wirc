@@ -21,7 +21,6 @@ export const setActive = (space: Space) => {
   spacesCollection.doc(space.id).collection('message').orderBy('when', 'asc').onSnapshot(async snapshot => {
     messages.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
     await nextTick()
-    // console.log(document.getElementById(messages.value[messages.value.length - 1].id))
     document.getElementById(messages.value[messages.value.length - 1].id).scrollIntoView()
   })
 }
