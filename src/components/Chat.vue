@@ -17,7 +17,7 @@
           class="flex flex-row space-x-2"
         >
           <UserIcon class="w-6 h-6" flex-none />
-          <div class="flex flex-col">
+          <div :id="message.id" class="flex flex-col">
             <div class="bg-blue-200 rounded-lg p-3">
               {{ message.message }}
             </div>
