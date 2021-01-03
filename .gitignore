@@ -3,4 +3,4 @@ node_modules
 dist
 *.local
 .presite
-src/logics/firebase.config.ts
+src/logics/firebase.config.json

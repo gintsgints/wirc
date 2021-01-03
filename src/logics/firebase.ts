@@ -2,18 +2,18 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { onUnmounted, ref } from 'vue'
-import { firebaseConfig } from './firebase.config'
+import firebaseConfig from './firebase.config.json'
 import { Message } from './message'
 import { Space } from './space'
 
-export const config = {
-  apiKey: process.env.API_KEY === undefined ? firebaseConfig.apiKey : process.env.API_KEY,
+const config = {
+  apiKey: firebaseConfig ? firebaseConfig.apiKey : process.env.API_KEY,
   authDomain: "wirc-2021.firebaseapp.com",
   projectId: "wirc-2021",
   storageBucket: "wirc-2021.appspot.com",
   messagingSenderId: "511220106686",
-  appId: process.env.API_ID === undefined ? firebaseConfig.appId : process.env.API_ID,
-  measurementId: process.env.MEASUREMENT_ID === undefined ? firebaseConfig.measurementId : process.env.MEASUREMENT_ID
+  appId: firebaseConfig ? firebaseConfig.appId : process.env.API_ID,
+  measurementId: firebaseConfig ? firebaseConfig.measurementId : process.env.MEASUREMENT_ID
 }
 
 firebase.initializeApp(config)
