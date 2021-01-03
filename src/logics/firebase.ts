@@ -14,6 +14,15 @@ export const auth = firebase.auth()
 export const usersCollection = db.collection('users')
 export const spacesCollection = db.collection('space')
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      unsubscribe()
+      resolve(user)
+    }, reject)
+  })
+}
+
 export const loadSpaces = () => {
   const spaces = ref([])
   const close = spacesCollection.orderBy('created', 'desc').onSnapshot(snapshot => {
