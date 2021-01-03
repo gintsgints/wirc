@@ -46,11 +46,11 @@ export const getUser = async (userId: string) => {
   return user.exists ? user.data() : null
 }
 
-export const addMessage = async (spaceId: string, message: Message) => {
+export const addMessage = async (space: Space, message: Message) => {
   if (auth.currentUser) {
     message.when = firebase.firestore.Timestamp.fromDate(new Date())
     message.user = auth.currentUser.uid
-    spacesCollection.doc(spaceId).collection('message').add(message)
+    spacesCollection.doc(space.id).collection('message').add(message)
   }
 }
 
