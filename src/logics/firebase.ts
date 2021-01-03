@@ -4,6 +4,7 @@ import 'firebase/firestore'
 import { onUnmounted, ref } from 'vue'
 import { firebaseConfig } from './firebase.config'
 import { Message } from './message'
+import { Space } from './space'
 
 firebase.initializeApp(firebaseConfig)
 
@@ -51,4 +52,12 @@ export const addMessage = async (spaceId: string, message: Message) => {
     message.user = auth.currentUser.uid
     spacesCollection.doc(spaceId).collection('message').add(message)
   }
+}
+
+export const updateSpace = (id: string, space: Space) => {
+  return spacesCollection.doc(id).update(space)
+}
+
+export const createSpace = (space: Space) => {
+  return spacesCollection.add(space)
 }

@@ -6,6 +6,7 @@
     <div class="flex flex-col w-1/2 space-y-1">
       <strong><UserFullName :user="activeSpace.creator" /></strong>
       <input
+        v-on:blur="updateSpace(activeSpace.id, activeSpace)"
         type="text"
         v-model="activeSpace.subject"
         name="subject"
@@ -33,5 +34,5 @@
 </template>
 
 <script setup lang="ts">
-import { activeSpace } from '/~/logics'
+import { activeSpace, updateSpace } from '/~/logics'
 </script>
