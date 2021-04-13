@@ -8,13 +8,13 @@ import { Ref } from 'vue'
 import { User } from '~/logic/user'
 
 const config = {
-  apiKey: process.env.API_KEY,
+  apiKey: import.meta.env.VITE_API_KEY,
   authDomain: 'wirc-2021.firebaseapp.com',
   projectId: 'wirc-2021',
   storageBucket: 'wirc-2021.appspot.com',
   messagingSenderId: '511220106686',
-  appId: process.env.API_ID,
-  measurementId: process.env.MEASUREMENT_ID
+  appId: import.meta.env.VITE_API_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID
 }
 
 firebase.initializeApp(config)
