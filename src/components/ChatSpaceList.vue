@@ -14,7 +14,7 @@
           stroke-linejoin="round"
           stroke-width="2"
           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-        ></path>
+        />
       </svg>
     </div>
     <div class="flex-auto overflow-y-auto">
@@ -33,13 +33,11 @@
           class="border-l-2 p-3 space-y-4"
         >
           <div class="flex flex-row items-center">
-            <UserIcon class="w-5 h-5 mr-2" />
-            <strong class="flex-grow"
-              ><UserFullName :user="space.creator"
-            /></strong>
-            <div class="text-sm text-gray-600">
-              {{ moment(new Date()).to(space.created.toDate()) }}
-            </div>
+            <UserIcon :user="space.creator" class="w-5 h-5 mr-2" />
+            <strong class="flex-grow">
+              <UserFullName :user="space.creator" />
+            </strong>
+            <div class="text-sm text-gray-600">{{ moment(new Date()).to(space.created.toDate()) }}</div>
           </div>
           <div class="flex flex-row items-center">
             <svg
@@ -54,7 +52,7 @@
                 stroke-linejoin="round"
                 stroke-width="2"
                 d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
+              />
             </svg>
             <div class="flex-grow truncate text-xs">
               {{
@@ -71,9 +69,9 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
 import moment from 'moment'
-import { activeSpace, setActive, loadSpaces, loadUsers } from '/~/logics'
+import { loadSpaces, loadUsers } from '../plugins/firebase'
+import { activeSpace, setActive, } from '../logic/space'
 
 const spaces = loadSpaces()
 const users = loadUsers()

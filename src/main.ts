@@ -1,12 +1,7 @@
-import './main.postcss'
 import { createApp } from 'vue'
-import installPlugins from './plugins'
-
 import App from './App.vue'
+import router from './plugins/router'
+import './index.css'
+import './plugins/firebase'
 
-const app = createApp(App)
-
-installPlugins(app)
-
-// true for hydrate
-app.mount('#app', true)
+createApp(App).use(router).mount('#app')

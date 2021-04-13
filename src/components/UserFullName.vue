@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { defineProps, onMounted, ref, watch } from 'vue'
-import { getUser } from '/~/logics'
+import { getUser } from '~/plugins/firebase'
 
 const firstName = ref('')
 const lastName = ref('')
@@ -19,8 +19,10 @@ const props = defineProps({
 
 const update = async () => {
   const user = await getUser(props.user)
-  firstName.value = user.firstName + ' '
-  lastName.value = user.lastName
+  if (user) {
+    firstName.value = user.firstName + ' '
+    lastName.value = user.lastName
+  }
 }
 
 watch(() => props.user, update, { flush: 'post' })
