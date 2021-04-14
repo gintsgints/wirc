@@ -37,20 +37,39 @@
             >Login</button>
             <a class="pt-3">Forgot password?</a>
             <router-link to="/register">Do not have account? Register here.</router-link>
+            <button @click="signGoogle()" class="flex items-center p-3">
+                <img src="../assets/google.svg" width="20" height="20" alt="Login in with google" />
+                <div class="pl-2">Login in with Google</div>
+            </button>
         </div>
     </form>
 </template>
   
 <script setup lang="ts">
+import firebase from 'firebase/app'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { auth } from '../plugins/firebase'
 
 const user = ref('')
 const password = ref('')
 const error = ref('')
+let provider: firebase.auth.GoogleAuthProvider | null = null
 
 const router = useRouter()
+
+const signGoogle = () => {
+    if (provider) {
+        auth
+            .signInWithPopup(provider)
+            .then((user) => {
+                router.push('/')
+            })
+            .catch((resulterr) => {
+                error.value = resulterr.message
+            })
+    }
+}
 
 const login = () => {
     auth
@@ -62,5 +81,9 @@ const login = () => {
             error.value = resulterr.message
         })
 }
+
+onMounted(() => {
+    provider = new firebase.auth.GoogleAuthProvider()
+})
 </script>
   
