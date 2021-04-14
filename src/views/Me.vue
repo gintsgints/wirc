@@ -55,7 +55,6 @@
       </div>
     </div>
   </form>
-  <div v-if="user">{{ user }}</div>
 </template>
 
 <script setup lang="ts">
