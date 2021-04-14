@@ -19,7 +19,7 @@
           />
         </svg>
       </router-link>
-      <router-link to="/" class="relative">
+      <router-link @click="openChatspace()" to="/" class="relative">
         <svg
           class="w-9 h-9"
           fill="none"
@@ -63,8 +63,14 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { auth } from '../plugins/firebase'
+import { setActive } from '../logic/space'
 
 const router = useRouter()
+
+const openChatspace = () => {
+  setActive(null)
+}
+
 const logout = () => {
   auth.signOut()
     .then(() => {

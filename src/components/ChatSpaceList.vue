@@ -71,7 +71,7 @@
 <script setup lang="ts">
 import moment from 'moment'
 import { loadSpaces, loadUsers } from '../plugins/firebase'
-import { activeSpace, setActive, } from '../logic/space'
+import { activeSpace, setActive } from '../logic/space'
 
 const spaces = loadSpaces()
 const users = loadUsers()

@@ -16,16 +16,20 @@ export interface Space {
 export const activeSpace = ref()
 export const messages: Ref<Array<any>> = ref([])
 
-export const setActive = (space: Space) => {
+export const setActive = (space: Space | null) => {
   activeSpace.value = space
-  spacesCollection.doc(space.id).collection('message').orderBy('when', 'asc').onSnapshot(async snapshot => {
-    messages.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-    await nextTick()
-    if (messages.value[messages.value.length - 1]) {
-      const element = document.getElementById(messages.value[messages.value.length - 1].id)
-      if (element) {
-        element.scrollIntoView()
+  if (space) {
+    spacesCollection.doc(space.id).collection('message').orderBy('when', 'asc').onSnapshot(async snapshot => {
+      messages.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      await nextTick()
+      if (messages.value[messages.value.length - 1]) {
+        const element = document.getElementById(messages.value[messages.value.length - 1].id)
+        if (element) {
+          element.scrollIntoView()
+        }
       }
-    }
-  })
+    })
+  } else {
+    messages.value = []
+  }
 }
