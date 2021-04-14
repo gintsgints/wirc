@@ -46,21 +46,40 @@
                 type="submit"
                 @click="register()"
             >Register</button>
+            <button @click="signGoogle()" class="flex items-center p-3">
+                <img src="../assets/google.svg" width="20" height="20" alt="Sign in with google" />
+                <div class="pl-2">Sign in with Google</div>
+            </button>
         </div>
     </form>
 </template>
   
 <script setup lang="ts">
+import firebase from 'firebase/app'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { auth } from '../plugins/firebase'
 
 const user = ref('')
 const password = ref('')
 const password2 = ref('')
 const error = ref('')
+let provider: firebase.auth.GoogleAuthProvider | null = null
 
 const router = useRouter()
+
+const signGoogle = () => {
+    if (provider) {
+        auth
+            .signInWithPopup(provider)
+            .then((user) => {
+                router.push('/')
+            })
+            .catch((resulterr) => {
+                error.value = resulterr.message
+            })
+    }
+}
 
 const register = () => {
     if (password.value !== password2.value) {
@@ -76,4 +95,8 @@ const register = () => {
             error.value = resulterr.message
         })
 }
+
+onMounted(() => {
+    provider = new firebase.auth.GoogleAuthProvider()
+})
 </script>
