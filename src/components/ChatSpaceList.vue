@@ -1,21 +1,8 @@
 <template>
   <div class="flex flex-col bg-white p-2">
     <div class="flex flex-none justify-between items-center pb-8 mb-4">
-      <h1 class="font-semibold pl-2 text-2xl">Chat spaces</h1>
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-        />
-      </svg>
+      <h1 class="font-semibold pl-2 text-2xl">WIrc</h1>
+      <Search v-model="searchTerm" />
     </div>
     <div class="flex-auto overflow-y-auto">
       <a
@@ -25,6 +12,7 @@
         @click="setActive(space)"
       >
         <div
+          v-if="searchTerm === '' || space.subject.indexOf(searchTerm) > 0"
           :class="
             activeSpace && space.id === activeSpace.id
               ? 'bg-blue-200 border-blue-500'
@@ -72,7 +60,9 @@
 import moment from 'moment'
 import { loadSpaces, loadUsers } from '../plugins/firebase'
 import { activeSpace, setActive } from '../logic/space'
+import { ref } from '@vue/reactivity'
 
+const searchTerm = ref('term?')
 const spaces = loadSpaces()
 const users = loadUsers()
 </script>
