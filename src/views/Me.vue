@@ -32,14 +32,19 @@
       </div>
       <div class="md:flex p-2 w-full">
         <div class="md:w-1/2">Icon URL</div>
-        <input
-          class="outline-none w-full md:w-2/3 p-1"
-          type="text"
-          placeholder="Specify url to your profile image"
-          name="photoURL"
-          id="photoURL"
-          v-model="photoURL"
-        />
+        <div class="flex place-items-center justify-between w-full md:w-2/3">
+          <input
+            class="outline-none p-1"
+            type="text"
+            placeholder="Paste url or button for Gravatar"
+            name="photoURL"
+            id="photoURL"
+            v-model="photoURL"
+          />
+          <button @click="getGravatar" class="p-1">
+            <img src="../assets/Gravatar.jpg" class="w-6 h-6" alt="Gravatar" />
+          </button>
+        </div>
       </div>
       <h1 v-if="error.length > 0" class="text-xl font-bold text-red-900">Login Failed {{ error }}</h1>
       <div class="flex justify-around w-1/2">
@@ -61,6 +66,7 @@
 import { useRouter } from 'vue-router'
 import { auth, getUser, updateUser } from '../plugins/firebase'
 import { ref, onMounted } from 'vue'
+import md5 from 'md5'
 
 const router = useRouter()
 const user = auth.currentUser
@@ -71,6 +77,12 @@ const photoURL = ref('')
 
 const goChat = () => {
   router.push('/')
+}
+
+const getGravatar = () => {
+  if (auth.currentUser?.email) {
+    photoURL.value = "https://www.gravatar.com/avatar/" + md5(auth.currentUser?.email.trim().toLowerCase())
+  }
 }
 
 const update = async () => {
