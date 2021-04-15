@@ -2,12 +2,7 @@
   <div
     class="flex flex-row select-auto rounded-md border border-gray-300 border-opacity-0 hover:border-opacity-60 place-items-center"
   >
-    <input
-      class="outline-none m-3"
-      type="text"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target?.value)"
-    />
+    <input class="outline-none m-3" type="text" :value="modelValue" @input="input" />
     <svg
       class="w-6 h-6 m-3"
       fill="none"
@@ -27,6 +22,13 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmit, onMounted, ref, watch } from 'vue'
+
+const emit = defineEmit(['update:modelValue'])
+
+const input = (event: any) => {
+  console.log(event)
+  emit('update:modelValue', event.target.value)
+}
 
 const props = defineProps({
   modelValue: {

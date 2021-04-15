@@ -62,7 +62,7 @@ import { loadSpaces, loadUsers } from '../plugins/firebase'
 import { activeSpace, setActive } from '../logic/space'
 import { ref } from '@vue/reactivity'
 
-const searchTerm = ref('term?')
+const searchTerm = ref('')
 const spaces = loadSpaces()
 const users = loadUsers()
 </script>
