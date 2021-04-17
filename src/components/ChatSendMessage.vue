@@ -1,12 +1,20 @@
 <template>
   <form v-on:submit.prevent class="flex flex-row items-center flex-none h-20 md:h-40 p-3 md:p-5">
-    <div class="flex-grow">
+    <div class="flex-grow static">
+      <div v-if="iconText" class="absolute bottom-40 bg-gray-100">
+        <div
+          class="p-2"
+          v-for="(value, name) in getEmoji()"
+          @click="addText(name)"
+        >{{ name }} {{ value }}</div>
+      </div>
       <textarea
+        @input="checkText($event)"
         @keydown.enter.exact.prevent
         @keyup.enter.exact="send"
         @keydown.enter.shift.exact="newline"
         v-model="text"
-        class="w-full h-full rounded p-2 md:p-4 shadow-lg outline-none border border-blue-600 border-opacity-0 hover:border-opacity-80"
+        class="w-full h-full rounded z-10 p-2 md:p-4 shadow-lg outline-none border border-blue-600 border-opacity-0 hover:border-opacity-80"
       ></textarea>
     </div>
     <button
@@ -36,8 +44,40 @@
 import { ref } from 'vue'
 import { activeSpace } from '../logic/space'
 import { addMessage } from '../plugins/firebase'
+import emoji from '../logic/emojis'
 
 const text = ref('')
+const iconText = ref('')
+
+const getEmoji = () => {
+  const result: any = {}
+  let i = 0
+  for (const key in emoji) {
+    if (key.indexOf(iconText.value.substr(1)) > -1 || iconText.value === ':') {
+      i++
+      result[key] = emoji[key]
+    }
+    if (i > 4) return result
+  }
+  return result
+}
+
+const addText = (name: string | number | symbol) => {
+  text.value = text.value.replace(iconText.value, emoji[name.toString()])
+  iconText.value = ''
+}
+
+const checkText = (event: any) => {
+  const lastSpace = text.value.substring(0, event.target.selectionStart).lastIndexOf(' :')
+  iconText.value = ''
+  if (lastSpace === -1) {
+    if (text.value.substring(0, 1) === ':') {
+      iconText.value = text.value.substring(0, event.target.selectionStart)
+    }
+  } else {
+    iconText.value = text.value.substring(lastSpace + 1, event.target.selectionStart)
+  }
+}
 
 const send = () => {
   addMessage(activeSpace.value, { message: text.value })
