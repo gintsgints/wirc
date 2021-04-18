@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { defineProps, onMounted, ref, watch } from 'vue'
-import { getUser } from '~/plugins/firebase'
+import { getUser } from '~/logic/user'
 
 const firstName = ref('')
 const lastName = ref('')

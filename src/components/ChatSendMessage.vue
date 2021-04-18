@@ -43,9 +43,9 @@
 
 <script setup lang="ts">
 import { ref, nextTick } from 'vue'
-import { activeSpace } from '../logic/space'
-import { addMessage } from '../plugins/firebase'
-import emoji from '../logic/emojis'
+import emoji from '~/logic/emojis'
+import { activeSpace } from '~/logic/space'
+import { addMessage } from '~/logic/message'
 
 const text = ref('')
 const iconText = ref('')

@@ -63,10 +63,11 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { auth, getUser, updateUser } from '../plugins/firebase'
-import { ref, onMounted } from 'vue'
 import md5 from 'md5'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { auth } from '../plugins/firebase'
+import { getUser, updateUser } from '~/logic/user'
 
 const router = useRouter()
 const user = auth.currentUser

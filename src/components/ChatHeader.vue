@@ -36,6 +36,5 @@
 </template>
 
 <script setup lang="ts">
-import { activeSpace } from '../logic/space'
-import { updateSpace } from '../plugins/firebase'
+import { activeSpace, updateSpace } from '~/logic/space'
 </script>

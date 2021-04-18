@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { getCurrentUser } from '../plugins/firebase'
-import Home from '../views/Home.vue'
+import { getCurrentUser } from '~/logic/user'
+import Home from '~/views/Home.vue'
 
 const routes = [
     { path: '/', component: Home },

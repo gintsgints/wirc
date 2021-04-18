@@ -35,6 +35,6 @@
 
 <script setup lang="ts">
 import moment from 'moment'
-import { activeSpace, messages } from '../logic/space'
-import { currentUser } from '../logic/user'
+import { messages } from '~/logic/space'
+import { currentUser } from '~/logic/user'
 </script>

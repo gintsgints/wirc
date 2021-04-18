@@ -62,8 +62,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { auth } from '../plugins/firebase'
-import { setActive } from '../logic/space'
+import { auth } from '~/plugins/firebase'
+import { setActive } from '~/logic/space'
 
 const router = useRouter()
 

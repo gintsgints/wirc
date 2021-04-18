@@ -58,9 +58,9 @@
 
 <script setup lang="ts">
 import moment from 'moment'
-import { loadSpaces, loadUsers } from '../plugins/firebase'
-import { activeSpace, setActive } from '../logic/space'
 import { ref } from '@vue/reactivity'
+import { loadSpaces, activeSpace, setActive } from '~/logic/space'
+import { loadUsers } from '~/logic/user'
 
 const searchTerm = ref('')
 const spaces = loadSpaces()

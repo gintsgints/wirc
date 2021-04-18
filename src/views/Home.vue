@@ -10,5 +10,5 @@
 </template>
 
 <script setup lang="ts">
-import { activeSpace } from '../logic/space'
+import { activeSpace } from '~/logic/space'
 </script>

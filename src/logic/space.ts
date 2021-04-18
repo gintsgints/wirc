@@ -1,8 +1,8 @@
-import { nextTick, ref, Ref } from 'vue'
+import { nextTick, ref, Ref, onUnmounted } from 'vue'
 import { Message } from './message'
 import { User } from './user'
+import { db } from '../plugins/firebase'
 import firebase from 'firebase/app'
-import { spacesCollection } from '../plugins/firebase'
 
 export interface Space {
   id: string
@@ -15,6 +15,24 @@ export interface Space {
 
 export const activeSpace = ref()
 export const messages: Ref<Array<any>> = ref([])
+export const spacesCollection = db.collection('space')
+
+export const loadSpaces = () => {
+  const spaces: Ref<Array<any>> = ref([])
+  const close = spacesCollection.orderBy('created', 'desc').onSnapshot(snapshot => {
+    spaces.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+  })
+  onUnmounted(close)
+  return spaces
+}
+
+export const updateSpace = (id: string, space: Space) => {
+  return spacesCollection.doc(id).update(space)
+}
+
+export const createSpace = (space: Space) => {
+  return spacesCollection.add(space)
+}
 
 export const setActive = (space: Space | null) => {
   activeSpace.value = space

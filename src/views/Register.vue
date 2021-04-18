@@ -58,7 +58,7 @@
 import firebase from 'firebase/app'
 import { useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
-import { auth } from '../plugins/firebase'
+import { auth } from '~/plugins/firebase'
 
 const user = ref('')
 const password = ref('')
