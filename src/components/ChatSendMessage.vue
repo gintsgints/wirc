@@ -9,6 +9,7 @@
         >{{ name }} {{ value }}</div>
       </div>
       <textarea
+        id="messagetext"
         @input="checkText($event)"
         @keydown.enter.exact.prevent
         @keyup.enter.exact="send"
@@ -41,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { activeSpace } from '../logic/space'
 import { addMessage } from '../plugins/firebase'
 import emoji from '../logic/emojis'
@@ -59,17 +60,15 @@ const getEmoji = () => {
     }
     if (i > 4) return result
   }
-  // Insert emoji if exact one is found
-  if (i === 1) {
-    iconText.value = ''
-    // text.value = text.value.replace(iconText.value, emoji[0])
-  }
   return result
 }
 
 const addText = (name: string | number | symbol) => {
   text.value = text.value.replace(iconText.value, emoji[name.toString()])
   iconText.value = ''
+  nextTick(() => {
+    document.getElementById('messagetext')?.focus()
+  })
 }
 
 const checkText = (event: any) => {
