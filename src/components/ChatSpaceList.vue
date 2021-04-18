@@ -52,6 +52,7 @@
           </div>
         </div>
       </a>
+      <button @click="createSpace()" class="w-full text-2xl bg-gray-100">+</button>
     </div>
   </div>
 </template>
@@ -59,10 +60,13 @@
 <script setup lang="ts">
 import moment from 'moment'
 import { ref } from '@vue/reactivity'
-import { loadSpaces, activeSpace, setActive } from '~/logic/space'
-import { loadUsers } from '~/logic/user'
+import { loadSpaces, spaces, activeSpace, setActive, createSpace } from '~/logic/space'
+import { onMounted } from '@vue/runtime-core'
 
 const searchTerm = ref('')
-const spaces = loadSpaces()
-const users = loadUsers()
+
+onMounted(() => {
+  loadSpaces()
+})
+
 </script>

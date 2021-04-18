@@ -1,24 +1,23 @@
 import { nextTick, ref, Ref, onUnmounted } from 'vue'
 import { Message } from './message'
-import { User } from './user'
-import { db } from '../plugins/firebase'
+import { db, auth } from '../plugins/firebase'
 import firebase from 'firebase/app'
 
 export interface Space {
-  id: string
+  id?: string
   subject?: string
   public?: boolean
-  creator: User
+  creator?: string
   created: firebase.firestore.Timestamp
   messages: Array<Message>
 }
 
 export const activeSpace = ref()
+export const spaces: Ref<Array<any>> = ref([])
 export const messages: Ref<Array<any>> = ref([])
 export const spacesCollection = db.collection('space')
 
 export const loadSpaces = () => {
-  const spaces: Ref<Array<any>> = ref([])
   const close = spacesCollection.orderBy('created', 'desc').onSnapshot(snapshot => {
     spaces.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
   })
@@ -30,8 +29,19 @@ export const updateSpace = (id: string, space: Space) => {
   return spacesCollection.doc(id).update(space)
 }
 
-export const createSpace = (space: Space) => {
-  return spacesCollection.add(space)
+export const createSpace = async (text?: string) => {
+  const newspace: Space = {
+    subject: text ? text : '',
+    created: firebase.firestore.Timestamp.fromDate(new Date()),
+    messages: []
+  }
+  if (auth.currentUser) {
+    newspace.creator = auth.currentUser.uid
+  }
+  const created: any = await spacesCollection.add(newspace)
+  setActive(spaces.value.find((space) => {
+    return space.id === created.id
+  }))
 }
 
 export const setActive = (space: Space | null) => {
