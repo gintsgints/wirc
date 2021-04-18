@@ -59,6 +59,11 @@ const getEmoji = () => {
     }
     if (i > 4) return result
   }
+  // Insert emoji if exact one is found
+  if (i === 1) {
+    iconText.value = ''
+    // text.value = text.value.replace(iconText.value, emoji[0])
+  }
   return result
 }
 
@@ -68,15 +73,25 @@ const addText = (name: string | number | symbol) => {
 }
 
 const checkText = (event: any) => {
-  const lastSpace = text.value.substring(0, event.target.selectionStart).lastIndexOf(' :')
+  const lastEmoji = text.value.substring(0, event.target.selectionStart).lastIndexOf(' :')
   iconText.value = ''
-  if (lastSpace === -1) {
+  if (lastEmoji === -1) {
     if (text.value.substring(0, 1) === ':') {
+      text.value = replaceText(1, event.target.selectionStart, text.value)
       iconText.value = text.value.substring(0, event.target.selectionStart)
     }
   } else {
-    iconText.value = text.value.substring(lastSpace + 1, event.target.selectionStart)
+    text.value = replaceText(lastEmoji + 2, event.target.selectionStart, text.value)
+    iconText.value = text.value.substring(lastEmoji + 1, event.target.selectionStart)
   }
+}
+
+const replaceText = (frompos: number, topos: number, text: string) => {
+  const toreplace = text.substring(frompos, topos)
+  if (emoji[toreplace] !== undefined) {
+    return text.replace(':' + toreplace, emoji[toreplace])
+  }
+  return text
 }
 
 const send = () => {
