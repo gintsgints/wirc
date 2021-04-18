@@ -74,7 +74,6 @@ const openChatspace = () => {
 const logout = () => {
   auth.signOut()
     .then(() => {
-      console.log('Logged out')
       router.push('/login')
     })
     .catch((resulterr) => {

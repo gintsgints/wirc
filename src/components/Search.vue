@@ -26,7 +26,6 @@ import { defineProps, defineEmit, onMounted, ref, watch } from 'vue'
 const emit = defineEmit(['update:modelValue'])
 
 const input = (event: any) => {
-  console.log(event)
   emit('update:modelValue', event.target.value)
 }
 
